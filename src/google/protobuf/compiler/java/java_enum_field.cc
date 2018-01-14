@@ -256,7 +256,7 @@ void EnumFieldGenerator::
 GenerateSerializedSizeCode(io::Printer* printer) const {
   printer->Print(variables_,
     "if ($get_has_field_bit_message$) {\n"
-    "  size += com.google.protobuf.CodedOutputStream\n"
+    "  size += com.google.protobuf2.CodedOutputStream\n"
     "    .computeEnumSize($number$, $name$_.getNumber());\n"
     "}\n");
 }
@@ -550,7 +550,7 @@ GenerateSerializedSizeCode(io::Printer* printer) const {
 
   printer->Print(variables_,
     "for (int i = 0; i < $name$_.size(); i++) {\n"
-    "  dataSize += com.google.protobuf.CodedOutputStream\n"
+    "  dataSize += com.google.protobuf2.CodedOutputStream\n"
     "    .computeEnumSizeNoTag($name$_.get(i).getNumber());\n"
     "}\n");
   printer->Print(
@@ -559,7 +559,7 @@ GenerateSerializedSizeCode(io::Printer* printer) const {
     printer->Print(variables_,
       "if (!get$capitalized_name$List().isEmpty()) {"
       "  size += $tag_size$;\n"
-      "  size += com.google.protobuf.CodedOutputStream\n"
+      "  size += com.google.protobuf2.CodedOutputStream\n"
       "    .computeRawVarint32Size(dataSize);\n"
       "}");
   } else {

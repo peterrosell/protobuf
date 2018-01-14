@@ -2,12 +2,23 @@ Protocol Buffers - Google's data interchange format
 Copyright 2008 Google Inc.
 http://code.google.com/apis/protocolbuffers/
 
+This is a branched version that only contains one changes, the
+package name for the java package has been changed from
+com.google.protobuf to com.google.protobuf2 . This change makes
+it possible to have both protobuf 2 and protobuf 3 libraries
+in the same JVM. Changes are made both to the protoc compiler used
+for compiling to java and in the java module. In the protobuf files
+the option java_package is also updated to com.google.protobuf2.
+
+This is only tested for Java. Use on you own risk. :-)
+
 C++ Installation - Unix
 =======================
 
 To build and install the C++ Protocol Buffer runtime and the Protocol
 Buffer compiler (protoc) execute the following:
 
+  $ ./autogen.sh
   $ ./configure
   $ make
   $ make check

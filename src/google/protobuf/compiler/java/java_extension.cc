@@ -139,9 +139,9 @@ void ExtensionGenerator::Generate(io::Printer* printer) {
       printer->Print(
           vars,
           "public static final\n"
-          "  com.google.protobuf.GeneratedMessage.GeneratedExtension<\n"
+          "  com.google.protobuf2.GeneratedMessage.GeneratedExtension<\n"
           "    $containing_type$,\n"
-          "    $type$> $name$ = com.google.protobuf.GeneratedMessage\n"
+          "    $type$> $name$ = com.google.protobuf2.GeneratedMessage\n"
           "        .newFileScopedGeneratedExtension(\n"
           "      $singular_type$.class,\n"
           "      $prototype$);\n");
@@ -150,9 +150,9 @@ void ExtensionGenerator::Generate(io::Printer* printer) {
       printer->Print(
           vars,
           "public static final\n"
-          "  com.google.protobuf.GeneratedMessage.GeneratedExtension<\n"
+          "  com.google.protobuf2.GeneratedMessage.GeneratedExtension<\n"
           "    $containing_type$,\n"
-          "    $type$> $name$ = com.google.protobuf.GeneratedMessage\n"
+          "    $type$> $name$ = com.google.protobuf2.GeneratedMessage\n"
           "        .newMessageScopedGeneratedExtension(\n"
           "      $scope$.getDefaultInstance(),\n"
           "      $index$,\n"
@@ -165,30 +165,30 @@ void ExtensionGenerator::Generate(io::Printer* printer) {
       printer->Print(
           vars,
           "public static final\n"
-          "  com.google.protobuf.GeneratedMessageLite.GeneratedExtension<\n"
+          "  com.google.protobuf2.GeneratedMessageLite.GeneratedExtension<\n"
           "    $containing_type$,\n"
-          "    $type$> $name$ = com.google.protobuf.GeneratedMessageLite\n"
+          "    $type$> $name$ = com.google.protobuf2.GeneratedMessageLite\n"
           "        .newRepeatedGeneratedExtension(\n"
           "      $containing_type$.getDefaultInstance(),\n"
           "      $prototype$,\n"
           "      $enum_map$,\n"
           "      $number$,\n"
-          "      com.google.protobuf.WireFormat.FieldType.$type_constant$,\n"
+          "      com.google.protobuf2.WireFormat.FieldType.$type_constant$,\n"
           "      $packed$);\n");
     } else {
       printer->Print(
           vars,
           "public static final\n"
-          "  com.google.protobuf.GeneratedMessageLite.GeneratedExtension<\n"
+          "  com.google.protobuf2.GeneratedMessageLite.GeneratedExtension<\n"
           "    $containing_type$,\n"
-          "    $type$> $name$ = com.google.protobuf.GeneratedMessageLite\n"
+          "    $type$> $name$ = com.google.protobuf2.GeneratedMessageLite\n"
           "        .newSingularGeneratedExtension(\n"
           "      $containing_type$.getDefaultInstance(),\n"
           "      $default$,\n"
           "      $prototype$,\n"
           "      $enum_map$,\n"
           "      $number$,\n"
-          "      com.google.protobuf.WireFormat.FieldType.$type_constant$);\n");
+          "      com.google.protobuf2.WireFormat.FieldType.$type_constant$);\n");
     }
   }
 }

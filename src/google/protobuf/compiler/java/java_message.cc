@@ -161,7 +161,7 @@ MessageGenerator::~MessageGenerator() {}
 
 void MessageGenerator::GenerateStaticVariables(io::Printer* printer) {
   if (HasDescriptorMethods(descriptor_)) {
-    // Because descriptor.proto (com.google.protobuf.DescriptorProtos) is
+    // Because descriptor.proto (com.google.protobuf2.DescriptorProtos) is
     // used in the construction of descriptors, we have a tricky bootstrapping
     // problem.  To help control static initialization order, we make sure all
     // descriptors and other static data that depends on them are members of
@@ -186,13 +186,13 @@ void MessageGenerator::GenerateStaticVariables(io::Printer* printer) {
 
     // The descriptor for this type.
     printer->Print(vars,
-      "$private$static com.google.protobuf.Descriptors.Descriptor\n"
+      "$private$static com.google.protobuf2.Descriptors.Descriptor\n"
       "  internal_$identifier$_descriptor;\n");
 
     // And the FieldAccessorTable.
     printer->Print(vars,
       "$private$static\n"
-      "  com.google.protobuf.GeneratedMessage.FieldAccessorTable\n"
+      "  com.google.protobuf2.GeneratedMessage.FieldAccessorTable\n"
       "    internal_$identifier$_fieldAccessorTable;\n");
   }
 
@@ -230,7 +230,7 @@ void MessageGenerator::GenerateStaticVariableInitializers(
     // And the FieldAccessorTable.
     printer->Print(vars,
       "internal_$identifier$_fieldAccessorTable = new\n"
-      "  com.google.protobuf.GeneratedMessage.FieldAccessorTable(\n"
+      "  com.google.protobuf2.GeneratedMessage.FieldAccessorTable(\n"
       "    internal_$identifier$_descriptor,\n"
       "    new java.lang.String[] { ");
     for (int i = 0; i < descriptor_->field_count(); i++) {
@@ -258,13 +258,13 @@ void MessageGenerator::GenerateInterface(io::Printer* printer) {
     if (HasDescriptorMethods(descriptor_)) {
       printer->Print(
         "public interface $classname$OrBuilder extends\n"
-        "    com.google.protobuf.GeneratedMessage.\n"
+        "    com.google.protobuf2.GeneratedMessage.\n"
         "        ExtendableMessageOrBuilder<$classname$> {\n",
         "classname", descriptor_->name());
     } else {
       printer->Print(
         "public interface $classname$OrBuilder extends \n"
-        "     com.google.protobuf.GeneratedMessageLite.\n"
+        "     com.google.protobuf2.GeneratedMessageLite.\n"
         "          ExtendableMessageOrBuilder<$classname$> {\n",
         "classname", descriptor_->name());
     }
@@ -272,12 +272,12 @@ void MessageGenerator::GenerateInterface(io::Printer* printer) {
     if (HasDescriptorMethods(descriptor_)) {
       printer->Print(
         "public interface $classname$OrBuilder\n"
-        "    extends com.google.protobuf.MessageOrBuilder {\n",
+        "    extends com.google.protobuf2.MessageOrBuilder {\n",
         "classname", descriptor_->name());
     } else {
       printer->Print(
         "public interface $classname$OrBuilder\n"
-        "    extends com.google.protobuf.MessageLiteOrBuilder {\n",
+        "    extends com.google.protobuf2.MessageLiteOrBuilder {\n",
         "classname", descriptor_->name());
     }
   }
@@ -309,41 +309,41 @@ void MessageGenerator::Generate(io::Printer* printer) {
     if (HasDescriptorMethods(descriptor_)) {
       printer->Print(
         "public $static$ final class $classname$ extends\n"
-        "    com.google.protobuf.GeneratedMessage.ExtendableMessage<\n"
+        "    com.google.protobuf2.GeneratedMessage.ExtendableMessage<\n"
         "      $classname$> implements $classname$OrBuilder {\n",
         "static", is_own_file ? "" : "static",
         "classname", descriptor_->name());
       builder_type = strings::Substitute(
-          "com.google.protobuf.GeneratedMessage.ExtendableBuilder<$0, ?>",
+          "com.google.protobuf2.GeneratedMessage.ExtendableBuilder<$0, ?>",
           ClassName(descriptor_));
     } else {
       printer->Print(
         "public $static$ final class $classname$ extends\n"
-        "    com.google.protobuf.GeneratedMessageLite.ExtendableMessage<\n"
+        "    com.google.protobuf2.GeneratedMessageLite.ExtendableMessage<\n"
         "      $classname$> implements $classname$OrBuilder {\n",
         "static", is_own_file ? "" : "static",
         "classname", descriptor_->name());
       builder_type = strings::Substitute(
-          "com.google.protobuf.GeneratedMessageLite.ExtendableBuilder<$0, ?>",
+          "com.google.protobuf2.GeneratedMessageLite.ExtendableBuilder<$0, ?>",
           ClassName(descriptor_));
     }
   } else {
     if (HasDescriptorMethods(descriptor_)) {
       printer->Print(
         "public $static$ final class $classname$ extends\n"
-        "    com.google.protobuf.GeneratedMessage\n"
+        "    com.google.protobuf2.GeneratedMessage\n"
         "    implements $classname$OrBuilder {\n",
         "static", is_own_file ? "" : "static",
         "classname", descriptor_->name());
-      builder_type = "com.google.protobuf.GeneratedMessage.Builder<?>";
+      builder_type = "com.google.protobuf2.GeneratedMessage.Builder<?>";
     } else {
       printer->Print(
         "public $static$ final class $classname$ extends\n"
-        "    com.google.protobuf.GeneratedMessageLite\n"
+        "    com.google.protobuf2.GeneratedMessageLite\n"
         "    implements $classname$OrBuilder {\n",
         "static", is_own_file ? "" : "static",
         "classname", descriptor_->name());
-      builder_type = "com.google.protobuf.GeneratedMessageLite.Builder";
+      builder_type = "com.google.protobuf2.GeneratedMessageLite.Builder";
     }
   }
   printer->Indent();
@@ -378,14 +378,14 @@ void MessageGenerator::Generate(io::Printer* printer) {
     "classname", descriptor_->name(),
     "set_default_unknown_fields", HasUnknownFields(descriptor_)
         ? " this.unknownFields ="
-          " com.google.protobuf.UnknownFieldSet.getDefaultInstance(); " : "");
+          " com.google.protobuf2.UnknownFieldSet.getDefaultInstance(); " : "");
 
   if (HasUnknownFields(descriptor_)) {
     printer->Print(
-        "private final com.google.protobuf.UnknownFieldSet unknownFields;\n"
+        "private final com.google.protobuf2.UnknownFieldSet unknownFields;\n"
         ""
         "@java.lang.Override\n"
-        "public final com.google.protobuf.UnknownFieldSet\n"
+        "public final com.google.protobuf2.UnknownFieldSet\n"
         "    getUnknownFields() {\n"
         "  return this.unknownFields;\n"
         "}\n");
@@ -494,7 +494,7 @@ GenerateMessageSerializationMethods(io::Printer* printer) {
        ExtensionRangeOrdering());
 
   printer->Print(
-    "public void writeTo(com.google.protobuf.CodedOutputStream output)\n"
+    "public void writeTo(com.google.protobuf2.CodedOutputStream output)\n"
     "                    throws java.io.IOException {\n");
   printer->Indent();
   // writeTo(CodedOutputStream output) might be invoked without
@@ -509,14 +509,14 @@ GenerateMessageSerializationMethods(io::Printer* printer) {
   if (descriptor_->extension_range_count() > 0) {
     if (descriptor_->options().message_set_wire_format()) {
       printer->Print(
-        "com.google.protobuf.GeneratedMessage$lite$\n"
+        "com.google.protobuf2.GeneratedMessage$lite$\n"
         "  .ExtendableMessage<$classname$>.ExtensionWriter extensionWriter =\n"
         "    newMessageSetExtensionWriter();\n",
         "lite", HasDescriptorMethods(descriptor_) ? "" : "Lite",
         "classname", ClassName(descriptor_));
     } else {
       printer->Print(
-        "com.google.protobuf.GeneratedMessage$lite$\n"
+        "com.google.protobuf2.GeneratedMessage$lite$\n"
         "  .ExtendableMessage<$classname$>.ExtensionWriter extensionWriter =\n"
         "    newExtensionWriter();\n",
         "lite", HasDescriptorMethods(descriptor_) ? "" : "Lite",
@@ -609,24 +609,24 @@ GenerateParseFromMethods(io::Printer* printer) {
   //   for code size.
   printer->Print(
     "public static $classname$ parseFrom(\n"
-    "    com.google.protobuf.ByteString data)\n"
-    "    throws com.google.protobuf.InvalidProtocolBufferException {\n"
+    "    com.google.protobuf2.ByteString data)\n"
+    "    throws com.google.protobuf2.InvalidProtocolBufferException {\n"
     "  return PARSER.parseFrom(data);\n"
     "}\n"
     "public static $classname$ parseFrom(\n"
-    "    com.google.protobuf.ByteString data,\n"
-    "    com.google.protobuf.ExtensionRegistryLite extensionRegistry)\n"
-    "    throws com.google.protobuf.InvalidProtocolBufferException {\n"
+    "    com.google.protobuf2.ByteString data,\n"
+    "    com.google.protobuf2.ExtensionRegistryLite extensionRegistry)\n"
+    "    throws com.google.protobuf2.InvalidProtocolBufferException {\n"
     "  return PARSER.parseFrom(data, extensionRegistry);\n"
     "}\n"
     "public static $classname$ parseFrom(byte[] data)\n"
-    "    throws com.google.protobuf.InvalidProtocolBufferException {\n"
+    "    throws com.google.protobuf2.InvalidProtocolBufferException {\n"
     "  return PARSER.parseFrom(data);\n"
     "}\n"
     "public static $classname$ parseFrom(\n"
     "    byte[] data,\n"
-    "    com.google.protobuf.ExtensionRegistryLite extensionRegistry)\n"
-    "    throws com.google.protobuf.InvalidProtocolBufferException {\n"
+    "    com.google.protobuf2.ExtensionRegistryLite extensionRegistry)\n"
+    "    throws com.google.protobuf2.InvalidProtocolBufferException {\n"
     "  return PARSER.parseFrom(data, extensionRegistry);\n"
     "}\n"
     "public static $classname$ parseFrom(java.io.InputStream input)\n"
@@ -635,7 +635,7 @@ GenerateParseFromMethods(io::Printer* printer) {
     "}\n"
     "public static $classname$ parseFrom(\n"
     "    java.io.InputStream input,\n"
-    "    com.google.protobuf.ExtensionRegistryLite extensionRegistry)\n"
+    "    com.google.protobuf2.ExtensionRegistryLite extensionRegistry)\n"
     "    throws java.io.IOException {\n"
     "  return PARSER.parseFrom(input, extensionRegistry);\n"
     "}\n"
@@ -645,18 +645,18 @@ GenerateParseFromMethods(io::Printer* printer) {
     "}\n"
     "public static $classname$ parseDelimitedFrom(\n"
     "    java.io.InputStream input,\n"
-    "    com.google.protobuf.ExtensionRegistryLite extensionRegistry)\n"
+    "    com.google.protobuf2.ExtensionRegistryLite extensionRegistry)\n"
     "    throws java.io.IOException {\n"
     "  return PARSER.parseDelimitedFrom(input, extensionRegistry);\n"
     "}\n"
     "public static $classname$ parseFrom(\n"
-    "    com.google.protobuf.CodedInputStream input)\n"
+    "    com.google.protobuf2.CodedInputStream input)\n"
     "    throws java.io.IOException {\n"
     "  return PARSER.parseFrom(input);\n"
     "}\n"
     "public static $classname$ parseFrom(\n"
-    "    com.google.protobuf.CodedInputStream input,\n"
-    "    com.google.protobuf.ExtensionRegistryLite extensionRegistry)\n"
+    "    com.google.protobuf2.CodedInputStream input,\n"
+    "    com.google.protobuf2.ExtensionRegistryLite extensionRegistry)\n"
     "    throws java.io.IOException {\n"
     "  return PARSER.parseFrom(input, extensionRegistry);\n"
     "}\n"
@@ -693,7 +693,7 @@ void MessageGenerator::GenerateBuilder(io::Printer* printer) {
      printer->Print(
       "@java.lang.Override\n"
       "protected Builder newBuilderForType(\n"
-      "    com.google.protobuf.GeneratedMessage.BuilderParent parent) {\n"
+      "    com.google.protobuf2.GeneratedMessage.BuilderParent parent) {\n"
       "  Builder builder = new Builder(parent);\n"
       "  return builder;\n"
       "}\n");
@@ -705,13 +705,13 @@ void MessageGenerator::GenerateBuilder(io::Printer* printer) {
     if (HasDescriptorMethods(descriptor_)) {
       printer->Print(
         "public static final class Builder extends\n"
-        "    com.google.protobuf.GeneratedMessage.ExtendableBuilder<\n"
+        "    com.google.protobuf2.GeneratedMessage.ExtendableBuilder<\n"
         "      $classname$, Builder> implements $classname$OrBuilder {\n",
         "classname", ClassName(descriptor_));
     } else {
       printer->Print(
         "public static final class Builder extends\n"
-        "    com.google.protobuf.GeneratedMessageLite.ExtendableBuilder<\n"
+        "    com.google.protobuf2.GeneratedMessageLite.ExtendableBuilder<\n"
         "      $classname$, Builder> implements $classname$OrBuilder {\n",
         "classname", ClassName(descriptor_));
     }
@@ -719,13 +719,13 @@ void MessageGenerator::GenerateBuilder(io::Printer* printer) {
     if (HasDescriptorMethods(descriptor_)) {
       printer->Print(
         "public static final class Builder extends\n"
-        "    com.google.protobuf.GeneratedMessage.Builder<Builder>\n"
+        "    com.google.protobuf2.GeneratedMessage.Builder<Builder>\n"
          "   implements $classname$OrBuilder {\n",
         "classname", ClassName(descriptor_));
     } else {
       printer->Print(
         "public static final class Builder extends\n"
-        "    com.google.protobuf.GeneratedMessageLite.Builder<\n"
+        "    com.google.protobuf2.GeneratedMessageLite.Builder<\n"
         "      $classname$, Builder>\n"
         "    implements $classname$OrBuilder {\n",
         "classname", ClassName(descriptor_));
@@ -773,7 +773,7 @@ void MessageGenerator::GenerateDescriptorMethods(io::Printer* printer) {
   if (HasDescriptorMethods(descriptor_)) {
     if (!descriptor_->options().no_standard_descriptor_accessor()) {
       printer->Print(
-        "public static final com.google.protobuf.Descriptors.Descriptor\n"
+        "public static final com.google.protobuf2.Descriptors.Descriptor\n"
         "    getDescriptor() {\n"
         "  return $fileclass$.internal_$identifier$_descriptor;\n"
         "}\n"
@@ -782,7 +782,7 @@ void MessageGenerator::GenerateDescriptorMethods(io::Printer* printer) {
         "identifier", UniqueFileScopeIdentifier(descriptor_));
     }
     printer->Print(
-      "protected com.google.protobuf.GeneratedMessage.FieldAccessorTable\n"
+      "protected com.google.protobuf2.GeneratedMessage.FieldAccessorTable\n"
       "    internalGetFieldAccessorTable() {\n"
       "  return $fileclass$.internal_$identifier$_fieldAccessorTable\n"
       "      .ensureFieldAccessorsInitialized(\n"
@@ -809,7 +809,7 @@ void MessageGenerator::GenerateCommonBuilderMethods(io::Printer* printer) {
   if (HasDescriptorMethods(descriptor_)) {
     printer->Print(
       "private Builder(\n"
-      "    com.google.protobuf.GeneratedMessage.BuilderParent parent) {\n"
+      "    com.google.protobuf2.GeneratedMessage.BuilderParent parent) {\n"
       "  super(parent);\n"
       "  maybeForceBuilderInitialization();\n"
       "}\n",
@@ -820,7 +820,7 @@ void MessageGenerator::GenerateCommonBuilderMethods(io::Printer* printer) {
   if (HasNestedBuilders(descriptor_)) {
     printer->Print(
       "private void maybeForceBuilderInitialization() {\n"
-      "  if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {\n");
+      "  if (com.google.protobuf2.GeneratedMessage.alwaysUseFieldBuilders) {\n");
 
     printer->Indent();
     printer->Indent();
@@ -869,7 +869,7 @@ void MessageGenerator::GenerateCommonBuilderMethods(io::Printer* printer) {
     "classname", ClassName(descriptor_));
   if (HasDescriptorMethods(descriptor_)) {
     printer->Print(
-      "public com.google.protobuf.Descriptors.Descriptor\n"
+      "public com.google.protobuf2.Descriptors.Descriptor\n"
       "    getDescriptorForType() {\n"
       "  return $fileclass$.internal_$identifier$_descriptor;\n"
       "}\n"
@@ -954,7 +954,7 @@ void MessageGenerator::GenerateCommonBuilderMethods(io::Printer* printer) {
     // messages type by its descriptor.
     if (HasDescriptorMethods(descriptor_)) {
       printer->Print(
-        "public Builder mergeFrom(com.google.protobuf.Message other) {\n"
+        "public Builder mergeFrom(com.google.protobuf2.Message other) {\n"
         "  if (other instanceof $classname$) {\n"
         "    return mergeFrom(($classname$)other);\n"
         "  } else {\n"
@@ -1003,13 +1003,13 @@ void MessageGenerator::GenerateCommonBuilderMethods(io::Printer* printer) {
 void MessageGenerator::GenerateBuilderParsingMethods(io::Printer* printer) {
   printer->Print(
     "public Builder mergeFrom(\n"
-    "    com.google.protobuf.CodedInputStream input,\n"
-    "    com.google.protobuf.ExtensionRegistryLite extensionRegistry)\n"
+    "    com.google.protobuf2.CodedInputStream input,\n"
+    "    com.google.protobuf2.ExtensionRegistryLite extensionRegistry)\n"
     "    throws java.io.IOException {\n"
     "  $classname$ parsedMessage = null;\n"
     "  try {\n"
     "    parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);\n"
-    "  } catch (com.google.protobuf.InvalidProtocolBufferException e) {\n"
+    "  } catch (com.google.protobuf2.InvalidProtocolBufferException e) {\n"
     "    parsedMessage = ($classname$) e.getUnfinishedMessage();\n"
     "    throw e;\n"
     "  } finally {\n"
@@ -1247,9 +1247,9 @@ void MessageGenerator::GenerateParsingConstructor(io::Printer* printer) {
 
   printer->Print(
       "private $classname$(\n"
-      "    com.google.protobuf.CodedInputStream input,\n"
-      "    com.google.protobuf.ExtensionRegistryLite extensionRegistry)\n"
-      "    throws com.google.protobuf.InvalidProtocolBufferException {\n",
+      "    com.google.protobuf2.CodedInputStream input,\n"
+      "    com.google.protobuf2.ExtensionRegistryLite extensionRegistry)\n"
+      "    throws com.google.protobuf2.InvalidProtocolBufferException {\n",
       "classname", descriptor_->name());
   printer->Indent();
 
@@ -1271,8 +1271,8 @@ void MessageGenerator::GenerateParsingConstructor(io::Printer* printer) {
 
   if (HasUnknownFields(descriptor_)) {
     printer->Print(
-      "com.google.protobuf.UnknownFieldSet.Builder unknownFields =\n"
-      "    com.google.protobuf.UnknownFieldSet.newBuilder();\n");
+      "com.google.protobuf2.UnknownFieldSet.Builder unknownFields =\n"
+      "    com.google.protobuf2.UnknownFieldSet.newBuilder();\n");
   }
 
   printer->Print(
@@ -1347,10 +1347,10 @@ void MessageGenerator::GenerateParsingConstructor(io::Printer* printer) {
 
   printer->Outdent();
   printer->Print(
-      "} catch (com.google.protobuf.InvalidProtocolBufferException e) {\n"
+      "} catch (com.google.protobuf2.InvalidProtocolBufferException e) {\n"
       "  throw e.setUnfinishedMessage(this);\n"
       "} catch (java.io.IOException e) {\n"
-      "  throw new com.google.protobuf.InvalidProtocolBufferException(\n"
+      "  throw new com.google.protobuf2.InvalidProtocolBufferException(\n"
       "      e.getMessage()).setUnfinishedMessage(this);\n"
       "} finally {\n");
   printer->Indent();
@@ -1381,15 +1381,15 @@ void MessageGenerator::GenerateParsingConstructor(io::Printer* printer) {
 // ===================================================================
 void MessageGenerator::GenerateParser(io::Printer* printer) {
   printer->Print(
-      "public static com.google.protobuf.Parser<$classname$> PARSER =\n"
-      "    new com.google.protobuf.AbstractParser<$classname$>() {\n",
+      "public static com.google.protobuf2.Parser<$classname$> PARSER =\n"
+      "    new com.google.protobuf2.AbstractParser<$classname$>() {\n",
       "classname", descriptor_->name());
   printer->Indent();
   printer->Print(
       "public $classname$ parsePartialFrom(\n"
-      "    com.google.protobuf.CodedInputStream input,\n"
-      "    com.google.protobuf.ExtensionRegistryLite extensionRegistry)\n"
-      "    throws com.google.protobuf.InvalidProtocolBufferException {\n",
+      "    com.google.protobuf2.CodedInputStream input,\n"
+      "    com.google.protobuf2.ExtensionRegistryLite extensionRegistry)\n"
+      "    throws com.google.protobuf2.InvalidProtocolBufferException {\n",
       "classname", descriptor_->name());
   if (HasGeneratedMethods(descriptor_)) {
     printer->Print(
@@ -1404,10 +1404,10 @@ void MessageGenerator::GenerateParser(io::Printer* printer) {
         "Builder builder = newBuilder();\n"
         "try {\n"
         "  builder.mergeFrom(input, extensionRegistry);\n"
-        "} catch (com.google.protobuf.InvalidProtocolBufferException e) {\n"
+        "} catch (com.google.protobuf2.InvalidProtocolBufferException e) {\n"
         "  throw e.setUnfinishedMessage(builder.buildPartial());\n"
         "} catch (java.io.IOException e) {\n"
-        "  throw new com.google.protobuf.InvalidProtocolBufferException(\n"
+        "  throw new com.google.protobuf2.InvalidProtocolBufferException(\n"
         "      e.getMessage()).setUnfinishedMessage(builder.buildPartial());\n"
         "}\n"
         "return builder.buildPartial();\n");
@@ -1422,7 +1422,7 @@ void MessageGenerator::GenerateParser(io::Printer* printer) {
 
   printer->Print(
       "@java.lang.Override\n"
-      "public com.google.protobuf.Parser<$classname$> getParserForType() {\n"
+      "public com.google.protobuf2.Parser<$classname$> getParserForType() {\n"
       "  return PARSER;\n"
       "}\n"
       "\n",

@@ -260,7 +260,7 @@ const char* BoxedPrimitiveTypeName(JavaType type) {
     case JAVATYPE_DOUBLE : return "java.lang.Double";
     case JAVATYPE_BOOLEAN: return "java.lang.Boolean";
     case JAVATYPE_STRING : return "java.lang.String";
-    case JAVATYPE_BYTES  : return "com.google.protobuf.ByteString";
+    case JAVATYPE_BYTES  : return "com.google.protobuf2.ByteString";
     case JAVATYPE_ENUM   : return NULL;
     case JAVATYPE_MESSAGE: return NULL;
 
@@ -326,10 +326,10 @@ string DefaultValue(const FieldDescriptor* field) {
         if (field->has_default_value()) {
           // See comments in Internal.java for gory details.
           return strings::Substitute(
-            "com.google.protobuf.Internal.bytesDefaultValue(\"$0\")",
+            "com.google.protobuf2.Internal.bytesDefaultValue(\"$0\")",
             CEscape(field->default_value_string()));
         } else {
-          return "com.google.protobuf.ByteString.EMPTY";
+          return "com.google.protobuf2.ByteString.EMPTY";
         }
       } else {
         if (AllAscii(field->default_value_string())) {
@@ -338,7 +338,7 @@ string DefaultValue(const FieldDescriptor* field) {
         } else {
           // See comments in Internal.java for gory details.
           return strings::Substitute(
-              "com.google.protobuf.Internal.stringDefaultValue(\"$0\")",
+              "com.google.protobuf2.Internal.stringDefaultValue(\"$0\")",
               CEscape(field->default_value_string()));
         }
       }

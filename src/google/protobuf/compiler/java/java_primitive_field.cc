@@ -61,7 +61,7 @@ const char* PrimitiveTypeName(JavaType type) {
     case JAVATYPE_DOUBLE : return "double";
     case JAVATYPE_BOOLEAN: return "boolean";
     case JAVATYPE_STRING : return "java.lang.String";
-    case JAVATYPE_BYTES  : return "com.google.protobuf.ByteString";
+    case JAVATYPE_BYTES  : return "com.google.protobuf2.ByteString";
     case JAVATYPE_ENUM   : return NULL;
     case JAVATYPE_MESSAGE: return NULL;
 
@@ -380,7 +380,7 @@ void PrimitiveFieldGenerator::
 GenerateSerializedSizeCode(io::Printer* printer) const {
   printer->Print(variables_,
     "if ($get_has_field_bit_message$) {\n"
-    "  size += com.google.protobuf.CodedOutputStream\n"
+    "  size += com.google.protobuf2.CodedOutputStream\n"
     "    .compute$capitalized_type$Size($number$, $name$_);\n"
     "}\n");
 }
@@ -728,7 +728,7 @@ GenerateSerializedSizeCode(io::Printer* printer) const {
   if (FixedSize(GetType(descriptor_)) == -1) {
     printer->Print(variables_,
       "for (int i = 0; i < $name$_.size(); i++) {\n"
-      "  dataSize += com.google.protobuf.CodedOutputStream\n"
+      "  dataSize += com.google.protobuf2.CodedOutputStream\n"
       "    .compute$capitalized_type$SizeNoTag($name$_.get(i));\n"
       "}\n");
   } else {
@@ -743,7 +743,7 @@ GenerateSerializedSizeCode(io::Printer* printer) const {
     printer->Print(variables_,
       "if (!get$capitalized_name$List().isEmpty()) {\n"
       "  size += $tag_size$;\n"
-      "  size += com.google.protobuf.CodedOutputStream\n"
+      "  size += com.google.protobuf2.CodedOutputStream\n"
       "      .computeInt32SizeNoTag(dataSize);\n"
       "}\n");
   } else {

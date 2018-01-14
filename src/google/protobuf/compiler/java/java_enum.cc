@@ -72,12 +72,12 @@ void EnumGenerator::Generate(io::Printer* printer) {
   if (HasDescriptorMethods(descriptor_)) {
     printer->Print(
       "public enum $classname$\n"
-      "    implements com.google.protobuf.ProtocolMessageEnum {\n",
+      "    implements com.google.protobuf2.ProtocolMessageEnum {\n",
       "classname", descriptor_->name());
   } else {
     printer->Print(
       "public enum $classname$\n"
-      "    implements com.google.protobuf.Internal.EnumLite {\n",
+      "    implements com.google.protobuf2.Internal.EnumLite {\n",
       "classname", descriptor_->name());
   }
   printer->Indent();
@@ -144,13 +144,13 @@ void EnumGenerator::Generate(io::Printer* printer) {
     "  }\n"
     "}\n"
     "\n"
-    "public static com.google.protobuf.Internal.EnumLiteMap<$classname$>\n"
+    "public static com.google.protobuf2.Internal.EnumLiteMap<$classname$>\n"
     "    internalGetValueMap() {\n"
     "  return internalValueMap;\n"
     "}\n"
-    "private static com.google.protobuf.Internal.EnumLiteMap<$classname$>\n"
+    "private static com.google.protobuf2.Internal.EnumLiteMap<$classname$>\n"
     "    internalValueMap =\n"
-    "      new com.google.protobuf.Internal.EnumLiteMap<$classname$>() {\n"
+    "      new com.google.protobuf2.Internal.EnumLiteMap<$classname$>() {\n"
     "        public $classname$ findValueByNumber(int number) {\n"
     "          return $classname$.valueOf(number);\n"
     "        }\n"
@@ -163,15 +163,15 @@ void EnumGenerator::Generate(io::Printer* printer) {
 
   if (HasDescriptorMethods(descriptor_)) {
     printer->Print(
-      "public final com.google.protobuf.Descriptors.EnumValueDescriptor\n"
+      "public final com.google.protobuf2.Descriptors.EnumValueDescriptor\n"
       "    getValueDescriptor() {\n"
       "  return getDescriptor().getValues().get(index);\n"
       "}\n"
-      "public final com.google.protobuf.Descriptors.EnumDescriptor\n"
+      "public final com.google.protobuf2.Descriptors.EnumDescriptor\n"
       "    getDescriptorForType() {\n"
       "  return getDescriptor();\n"
       "}\n"
-      "public static final com.google.protobuf.Descriptors.EnumDescriptor\n"
+      "public static final com.google.protobuf2.Descriptors.EnumDescriptor\n"
       "    getDescriptor() {\n");
 
     // TODO(kenton):  Cache statically?  Note that we can't access descriptors
@@ -217,7 +217,7 @@ void EnumGenerator::Generate(io::Printer* printer) {
     printer->Print(
       "\n"
       "public static $classname$ valueOf(\n"
-      "    com.google.protobuf.Descriptors.EnumValueDescriptor desc) {\n"
+      "    com.google.protobuf2.Descriptors.EnumValueDescriptor desc) {\n"
       "  if (desc.getType() != getDescriptor()) {\n"
       "    throw new java.lang.IllegalArgumentException(\n"
       "      \"EnumValueDescriptor is not for this type.\");\n"

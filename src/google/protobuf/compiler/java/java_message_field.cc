@@ -217,7 +217,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
     printer->Print(variables_,
       // If this builder is non-null, it is used and the other fields are
       // ignored.
-      "private com.google.protobuf.SingleFieldBuilder<\n"
+      "private com.google.protobuf2.SingleFieldBuilder<\n"
       "    $type$, $type$.Builder, $type$OrBuilder> $name$Builder_;"
       "\n");
   }
@@ -324,11 +324,11 @@ GenerateBuilderMembers(io::Printer* printer) const {
       "}\n");
     WriteFieldDocComment(printer, descriptor_);
     printer->Print(variables_,
-      "private com.google.protobuf.SingleFieldBuilder<\n"
+      "private com.google.protobuf2.SingleFieldBuilder<\n"
       "    $type$, $type$.Builder, $type$OrBuilder> \n"
       "    get$capitalized_name$FieldBuilder() {\n"
       "  if ($name$Builder_ == null) {\n"
-      "    $name$Builder_ = new com.google.protobuf.SingleFieldBuilder<\n"
+      "    $name$Builder_ = new com.google.protobuf2.SingleFieldBuilder<\n"
       "        $type$, $type$.Builder, $type$OrBuilder>(\n"
       "            $name$_,\n"
       "            getParentForChildren(),\n"
@@ -426,7 +426,7 @@ void MessageFieldGenerator::
 GenerateSerializedSizeCode(io::Printer* printer) const {
   printer->Print(variables_,
     "if ($get_has_field_bit_message$) {\n"
-    "  size += com.google.protobuf.CodedOutputStream\n"
+    "  size += com.google.protobuf2.CodedOutputStream\n"
     "    .compute$group_or_message$Size($number$, $name$_);\n"
     "}\n");
 }
@@ -601,7 +601,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
     printer->Print(variables_,
       // If this builder is non-null, it is used and the other fields are
       // ignored.
-      "private com.google.protobuf.RepeatedFieldBuilder<\n"
+      "private com.google.protobuf2.RepeatedFieldBuilder<\n"
       "    $type$, $type$.Builder, $type$OrBuilder> $name$Builder_;\n"
       "\n");
   }
@@ -819,11 +819,11 @@ GenerateBuilderMembers(io::Printer* printer) const {
       "     get$capitalized_name$BuilderList() {\n"
       "  return get$capitalized_name$FieldBuilder().getBuilderList();\n"
       "}\n"
-      "private com.google.protobuf.RepeatedFieldBuilder<\n"
+      "private com.google.protobuf2.RepeatedFieldBuilder<\n"
       "    $type$, $type$.Builder, $type$OrBuilder> \n"
       "    get$capitalized_name$FieldBuilder() {\n"
       "  if ($name$Builder_ == null) {\n"
-      "    $name$Builder_ = new com.google.protobuf.RepeatedFieldBuilder<\n"
+      "    $name$Builder_ = new com.google.protobuf2.RepeatedFieldBuilder<\n"
       "        $type$, $type$.Builder, $type$OrBuilder>(\n"
       "            $name$_,\n"
       "            $get_mutable_bit_builder$,\n"
@@ -882,7 +882,7 @@ GenerateMergingCode(io::Printer* printer) const {
     "    $name$_ = other.$name$_;\n"
     "    $clear_mutable_bit_builder$;\n"
     "    $name$Builder_ = \n"
-    "      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?\n"
+    "      com.google.protobuf2.GeneratedMessage.alwaysUseFieldBuilders ?\n"
     "         get$capitalized_name$FieldBuilder() : null;\n"
     "  } else {\n"
     "    $name$Builder_.addAllMessages(other.$name$_);\n"
@@ -943,7 +943,7 @@ void RepeatedMessageFieldGenerator::
 GenerateSerializedSizeCode(io::Printer* printer) const {
   printer->Print(variables_,
     "for (int i = 0; i < $name$_.size(); i++) {\n"
-    "  size += com.google.protobuf.CodedOutputStream\n"
+    "  size += com.google.protobuf2.CodedOutputStream\n"
     "    .compute$group_or_message$Size($number$, $name$_.get(i));\n"
     "}\n");
 }

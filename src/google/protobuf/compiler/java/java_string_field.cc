@@ -64,7 +64,7 @@ void SetPrimitiveVariables(const FieldDescriptor* descriptor,
     UnderscoresToCapitalizedCamelCase(descriptor);
   (*variables)["constant_name"] = FieldConstantName(descriptor);
   (*variables)["number"] = SimpleItoa(descriptor->number());
-  (*variables)["empty_list"] = "com.google.protobuf.LazyStringArrayList.EMPTY";
+  (*variables)["empty_list"] = "com.google.protobuf2.LazyStringArrayList.EMPTY";
 
   (*variables)["default"] = DefaultValue(descriptor);
   (*variables)["default_init"] = ("= " + DefaultValue(descriptor));
@@ -177,7 +177,7 @@ GenerateInterfaceMembers(io::Printer* printer) const {
     "$deprecation$java.lang.String get$capitalized_name$();\n");
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
-    "$deprecation$com.google.protobuf.ByteString\n"
+    "$deprecation$com.google.protobuf2.ByteString\n"
     "    get$capitalized_name$Bytes();\n");
 }
 
@@ -198,8 +198,8 @@ GenerateMembers(io::Printer* printer) const {
     "  if (ref instanceof java.lang.String) {\n"
     "    return (java.lang.String) ref;\n"
     "  } else {\n"
-    "    com.google.protobuf.ByteString bs = \n"
-    "        (com.google.protobuf.ByteString) ref;\n"
+    "    com.google.protobuf2.ByteString bs = \n"
+    "        (com.google.protobuf2.ByteString) ref;\n"
     "    java.lang.String s = bs.toStringUtf8();\n"
     "    if (bs.isValidUtf8()) {\n"
     "      $name$_ = s;\n"
@@ -209,17 +209,17 @@ GenerateMembers(io::Printer* printer) const {
     "}\n");
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
-    "$deprecation$public com.google.protobuf.ByteString\n"
+    "$deprecation$public com.google.protobuf2.ByteString\n"
     "    get$capitalized_name$Bytes() {\n"
     "  java.lang.Object ref = $name$_;\n"
     "  if (ref instanceof java.lang.String) {\n"
-    "    com.google.protobuf.ByteString b = \n"
-    "        com.google.protobuf.ByteString.copyFromUtf8(\n"
+    "    com.google.protobuf2.ByteString b = \n"
+    "        com.google.protobuf2.ByteString.copyFromUtf8(\n"
     "            (java.lang.String) ref);\n"
     "    $name$_ = b;\n"
     "    return b;\n"
     "  } else {\n"
-    "    return (com.google.protobuf.ByteString) ref;\n"
+    "    return (com.google.protobuf2.ByteString) ref;\n"
     "  }\n"
     "}\n");
 }
@@ -239,7 +239,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
     "$deprecation$public java.lang.String get$capitalized_name$() {\n"
     "  java.lang.Object ref = $name$_;\n"
     "  if (!(ref instanceof java.lang.String)) {\n"
-    "    java.lang.String s = ((com.google.protobuf.ByteString) ref)\n"
+    "    java.lang.String s = ((com.google.protobuf2.ByteString) ref)\n"
     "        .toStringUtf8();\n"
     "    $name$_ = s;\n"
     "    return s;\n"
@@ -250,17 +250,17 @@ GenerateBuilderMembers(io::Printer* printer) const {
 
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
-    "$deprecation$public com.google.protobuf.ByteString\n"
+    "$deprecation$public com.google.protobuf2.ByteString\n"
     "    get$capitalized_name$Bytes() {\n"
     "  java.lang.Object ref = $name$_;\n"
     "  if (ref instanceof String) {\n"
-    "    com.google.protobuf.ByteString b = \n"
-    "        com.google.protobuf.ByteString.copyFromUtf8(\n"
+    "    com.google.protobuf2.ByteString b = \n"
+    "        com.google.protobuf2.ByteString.copyFromUtf8(\n"
     "            (java.lang.String) ref);\n"
     "    $name$_ = b;\n"
     "    return b;\n"
     "  } else {\n"
-    "    return (com.google.protobuf.ByteString) ref;\n"
+    "    return (com.google.protobuf2.ByteString) ref;\n"
     "  }\n"
     "}\n");
 
@@ -290,7 +290,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
     "$deprecation$public Builder set$capitalized_name$Bytes(\n"
-    "    com.google.protobuf.ByteString value) {\n"
+    "    com.google.protobuf2.ByteString value) {\n"
     "$null_check$"
     "  $set_has_field_bit_builder$;\n"
     "  $name$_ = value;\n"
@@ -361,7 +361,7 @@ void StringFieldGenerator::
 GenerateSerializedSizeCode(io::Printer* printer) const {
   printer->Print(variables_,
     "if ($get_has_field_bit_message$) {\n"
-    "  size += com.google.protobuf.CodedOutputStream\n"
+    "  size += com.google.protobuf2.CodedOutputStream\n"
     "    .computeBytesSize($number$, get$capitalized_name$Bytes());\n"
     "}\n");
 }
@@ -422,7 +422,7 @@ GenerateInterfaceMembers(io::Printer* printer) const {
     "$deprecation$java.lang.String get$capitalized_name$(int index);\n");
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
-    "$deprecation$com.google.protobuf.ByteString\n"
+    "$deprecation$com.google.protobuf2.ByteString\n"
     "    get$capitalized_name$Bytes(int index);\n");
 }
 
@@ -430,7 +430,7 @@ GenerateInterfaceMembers(io::Printer* printer) const {
 void RepeatedStringFieldGenerator::
 GenerateMembers(io::Printer* printer) const {
   printer->Print(variables_,
-    "private com.google.protobuf.LazyStringList $name$_;\n");
+    "private com.google.protobuf2.LazyStringList $name$_;\n");
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
     "$deprecation$public java.util.List<java.lang.String>\n"
@@ -449,7 +449,7 @@ GenerateMembers(io::Printer* printer) const {
     "}\n");
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
-    "$deprecation$public com.google.protobuf.ByteString\n"
+    "$deprecation$public com.google.protobuf2.ByteString\n"
     "    get$capitalized_name$Bytes(int index) {\n"
     "  return $name$_.getByteString(index);\n"
     "}\n");
@@ -473,12 +473,12 @@ GenerateBuilderMembers(io::Printer* printer) const {
   // just that the list cannot be modified via the reference but that the
   // list can never be modified.
   printer->Print(variables_,
-    "private com.google.protobuf.LazyStringList $name$_ = $empty_list$;\n");
+    "private com.google.protobuf2.LazyStringList $name$_ = $empty_list$;\n");
 
   printer->Print(variables_,
     "private void ensure$capitalized_name$IsMutable() {\n"
     "  if (!$get_mutable_bit_builder$) {\n"
-    "    $name$_ = new com.google.protobuf.LazyStringArrayList($name$_);\n"
+    "    $name$_ = new com.google.protobuf2.LazyStringArrayList($name$_);\n"
     "    $set_mutable_bit_builder$;\n"
     "   }\n"
     "}\n");
@@ -505,7 +505,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
     "}\n");
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
-    "$deprecation$public com.google.protobuf.ByteString\n"
+    "$deprecation$public com.google.protobuf2.ByteString\n"
     "    get$capitalized_name$Bytes(int index) {\n"
     "  return $name$_.getByteString(index);\n"
     "}\n");
@@ -550,7 +550,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
     "$deprecation$public Builder add$capitalized_name$Bytes(\n"
-    "    com.google.protobuf.ByteString value) {\n"
+    "    com.google.protobuf2.ByteString value) {\n"
     "$null_check$"
     "  ensure$capitalized_name$IsMutable();\n"
     "  $name$_.add(value);\n"
@@ -603,7 +603,7 @@ GenerateBuildingCode(io::Printer* printer) const {
 
   printer->Print(variables_,
     "if ($get_mutable_bit_builder$) {\n"
-    "  $name$_ = new com.google.protobuf.UnmodifiableLazyStringList(\n"
+    "  $name$_ = new com.google.protobuf2.UnmodifiableLazyStringList(\n"
     "      $name$_);\n"
     "  $clear_mutable_bit_builder$;\n"
     "}\n"
@@ -614,7 +614,7 @@ void RepeatedStringFieldGenerator::
 GenerateParsingCode(io::Printer* printer) const {
   printer->Print(variables_,
     "if (!$get_mutable_bit_parser$) {\n"
-    "  $name$_ = new com.google.protobuf.LazyStringArrayList();\n"
+    "  $name$_ = new com.google.protobuf2.LazyStringArrayList();\n"
     "  $set_mutable_bit_parser$;\n"
     "}\n"
     "$name$_.add(input.readBytes());\n");
@@ -626,7 +626,7 @@ GenerateParsingCodeFromPacked(io::Printer* printer) const {
     "int length = input.readRawVarint32();\n"
     "int limit = input.pushLimit(length);\n"
     "if (!$get_mutable_bit_parser$ && input.getBytesUntilLimit() > 0) {\n"
-    "  $name$_ = new com.google.protobuf.LazyStringArrayList();\n"
+    "  $name$_ = new com.google.protobuf2.LazyStringArrayList();\n"
     "  $set_mutable_bit_parser$;\n"
     "}\n"
     "while (input.getBytesUntilLimit() > 0) {\n"
@@ -639,7 +639,7 @@ void RepeatedStringFieldGenerator::
 GenerateParsingDoneCode(io::Printer* printer) const {
   printer->Print(variables_,
     "if ($get_mutable_bit_parser$) {\n"
-    "  $name$_ = new com.google.protobuf.UnmodifiableLazyStringList($name$_);\n"
+    "  $name$_ = new com.google.protobuf2.UnmodifiableLazyStringList($name$_);\n"
     "}\n");
 }
 
@@ -671,7 +671,7 @@ GenerateSerializedSizeCode(io::Printer* printer) const {
 
   printer->Print(variables_,
     "for (int i = 0; i < $name$_.size(); i++) {\n"
-    "  dataSize += com.google.protobuf.CodedOutputStream\n"
+    "  dataSize += com.google.protobuf2.CodedOutputStream\n"
     "    .computeBytesSizeNoTag($name$_.getByteString(i));\n"
     "}\n");
 
@@ -682,7 +682,7 @@ GenerateSerializedSizeCode(io::Printer* printer) const {
     printer->Print(variables_,
       "if (!get$capitalized_name$List().isEmpty()) {\n"
       "  size += $tag_size$;\n"
-      "  size += com.google.protobuf.CodedOutputStream\n"
+      "  size += com.google.protobuf2.CodedOutputStream\n"
       "      .computeInt32SizeNoTag(dataSize);\n"
       "}\n");
   } else {

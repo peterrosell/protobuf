@@ -202,7 +202,7 @@ void FileGenerator::Generate(io::Printer* printer) {
 
   printer->Print(
     "public static void registerAllExtensions(\n"
-    "    com.google.protobuf.ExtensionRegistry$lite$ registry) {\n",
+    "    com.google.protobuf2.ExtensionRegistry$lite$ registry) {\n",
     "lite", HasDescriptorMethods(file_) ? "" : "Lite");
 
   printer->Indent();
@@ -296,11 +296,11 @@ void FileGenerator::GenerateEmbeddedDescriptor(io::Printer* printer) {
   file_proto.SerializeToString(&file_data);
 
   printer->Print(
-    "public static com.google.protobuf.Descriptors.FileDescriptor\n"
+    "public static com.google.protobuf2.Descriptors.FileDescriptor\n"
     "    getDescriptor() {\n"
     "  return descriptor;\n"
     "}\n"
-    "private static com.google.protobuf.Descriptors.FileDescriptor\n"
+    "private static com.google.protobuf2.Descriptors.FileDescriptor\n"
     "    descriptor;\n"
     "static {\n"
     "  java.lang.String[] descriptorData = {\n");
@@ -330,12 +330,12 @@ void FileGenerator::GenerateEmbeddedDescriptor(io::Printer* printer) {
   // Create the InternalDescriptorAssigner.
 
   printer->Print(
-    "com.google.protobuf.Descriptors.FileDescriptor."
+    "com.google.protobuf2.Descriptors.FileDescriptor."
       "InternalDescriptorAssigner assigner =\n"
-    "  new com.google.protobuf.Descriptors.FileDescriptor."
+    "  new com.google.protobuf2.Descriptors.FileDescriptor."
       "InternalDescriptorAssigner() {\n"
-    "    public com.google.protobuf.ExtensionRegistry assignDescriptors(\n"
-    "        com.google.protobuf.Descriptors.FileDescriptor root) {\n"
+    "    public com.google.protobuf2.ExtensionRegistry assignDescriptors(\n"
+    "        com.google.protobuf2.Descriptors.FileDescriptor root) {\n"
     "      descriptor = root;\n");
 
   printer->Indent();
@@ -375,8 +375,8 @@ void FileGenerator::GenerateEmbeddedDescriptor(io::Printer* printer) {
     // Must construct an ExtensionRegistry containing all existing extensions
     // and return it.
     printer->Print(
-      "com.google.protobuf.ExtensionRegistry registry =\n"
-      "  com.google.protobuf.ExtensionRegistry.newInstance();\n");
+      "com.google.protobuf2.ExtensionRegistry registry =\n"
+      "  com.google.protobuf2.ExtensionRegistry.newInstance();\n");
     for (int i = 0; i < extensions.size(); i++) {
       ExtensionGenerator(extensions[i]).GenerateRegistrationCode(printer);
     }
@@ -399,9 +399,9 @@ void FileGenerator::GenerateEmbeddedDescriptor(io::Printer* printer) {
   // Invoke internalBuildGeneratedFileFrom() to build the file.
 
   printer->Print(
-    "com.google.protobuf.Descriptors.FileDescriptor\n"
+    "com.google.protobuf2.Descriptors.FileDescriptor\n"
     "  .internalBuildGeneratedFileFrom(descriptorData,\n"
-    "    new com.google.protobuf.Descriptors.FileDescriptor[] {\n");
+    "    new com.google.protobuf2.Descriptors.FileDescriptor[] {\n");
 
   for (int i = 0; i < file_->dependency_count(); i++) {
     if (ShouldIncludeDependency(file_->dependency(i))) {
